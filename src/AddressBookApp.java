@@ -205,6 +205,8 @@ public class AddressBookApp {
                 }
             } catch (AddressBookEmptyException e) {
                 System.out.println(e.getMessage());
+            } catch (ContactInvalidException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -259,7 +261,7 @@ public class AddressBookApp {
     }
 
     // Method to run a hardcoded test
-    private static void runHardcodedTest(AddressBook addressBook) throws AddressBookEmptyException {
+    private static void runHardcodedTest(AddressBook addressBook) throws AddressBookEmptyException, ContactInvalidException {
         Contact c1 = new Contact("John Doe", "555-1234", "john.doe@example.com");
         Contact c2 = new Contact("Jane Smith", "555-5678", "jane.smith@example.com");
         addressBook.addContact(c1);

@@ -38,10 +38,6 @@ public class Contact {
 
 
 
-
-
-
-
 // AddressBook Class
 class AddressBook {
     private Map<String, Contact> contacts = new HashMap<>();
@@ -57,9 +53,12 @@ class AddressBook {
         return contacts.get(name);
     }
 
-    public void editContact(String name, Contact newContact) throws AddressBookEmptyException  {
+    public void editContact(String name, Contact newContact) throws AddressBookEmptyException, ContactInvalidException {
         if (contacts.isEmpty()) {
             throw new AddressBookEmptyException();
+        }
+        if (!contacts.containsKey(name)) {
+            throw new ContactInvalidException(name); // Throw exception if contact is invalid or not found
         }
         contacts.put(name, newContact);
     }
