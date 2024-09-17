@@ -75,8 +75,8 @@ Displays all contacts again to verify the changes.
 ## **Credits**
 1. RealESRGAN (https://github.com/xinntao/Real-ESRGAN/blob/master/README.md) on github for inspiration from their readme file
 2. Tabnine chatai for assistance in javadocs, getters/setters, general syntax inquiries
-3. Dhruv Singh for name usage
-4. Stackoverflow with specifics listed below
+3. Stackoverflow with specifics listed below
+4. vishantvekhmb from geeks for geeks for verbose mode breakdown (https://www.geeksforgeeks.org/what-is-verbose-mode/)
 ## **Sources**
 - [Java HashMap: Working with Key-Value Pairs](https://stackoverflow.com/questions/15528139/how-to-use-hashmap-in-java)
 - [Handling Exceptions in Java: Best Practices](https://stackoverflow.com/questions/6415916/what-are-the-best-practices-for-handling-exceptions-in-java)

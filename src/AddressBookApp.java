@@ -224,7 +224,7 @@ public class AddressBookApp {
             } catch (IOException e) {
                 System.out.println("CATASTROPHIC FAILURE");
             }
-            return; // Return since the file is newly created, no contacts to read
+            return;
         }
 
         // If the file exists, proceed with reading contacts
@@ -297,6 +297,18 @@ public class AddressBookApp {
 
     // Method to validate phone numbers
     private static boolean isValidPhoneNumber(String phoneNumber) {
-        return phoneNumber.matches("\\d{10}"); // Check if the phone number is exactly 10 digits
+        if (phoneNumber.length() != 10) {
+            return false; // Check if the phone number has exactly 10 digits
+        }
+
+        for (int i = 0; i < phoneNumber.length(); i++) {
+            char c = phoneNumber.charAt(i);
+            if (!Character.isDigit(c)) {
+                return false; // Check if each character is a digit
+            }
+        }
+
+        return true; // If all checks pass, the phone number is valid
     }
+
 }
