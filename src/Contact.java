@@ -9,17 +9,12 @@ import java.util.Map;
 // The Contact class represents an individual contact in the address book.
 public class Contact {
     private String name;
-    private String phoneNumber;
+    private String phone;
     private String email;
 
-    public Contact(String name, String phoneNumber, String email) {
+    public Contact(String name, String phone, String email) {
         this.name = name;
-        if (phoneNumber != null) {
-            this.phoneNumber = phoneNumber;
-        } else {
-            this.phoneNumber = "";
-        }
-
+        this.phone = phone;
         this.email = email;
     }
 
@@ -27,8 +22,8 @@ public class Contact {
         return name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
     public String getEmail() {
@@ -37,10 +32,7 @@ public class Contact {
 
     @Override
     public String toString() {
-        return "Name: " + name + ", Phone: " + phoneNumber + ", Email: " + email;
-    }
-    public String toCSV() {
-        return name + "," + phoneNumber + "," + email;
+        return "Name: " + name + ", Phone: " + phone + ", Email: " + email;
     }
 }
 
@@ -48,6 +40,9 @@ public class Contact {
 
 
 
+
+
+// AddressBook Class
 class AddressBook {
     private Map<String, Contact> contacts = new HashMap<>();
 
@@ -55,31 +50,42 @@ class AddressBook {
         contacts.put(contact.getName(), contact);
     }
 
-    public Contact searchContact(String name) {
+    public Contact searchContact(String name) throws AddressBookEmptyException{
+        if (contacts.isEmpty()) {
+            throw new AddressBookEmptyException();
+        }
         return contacts.get(name);
     }
 
-    public void editContact(String name, Contact newContact) {
+    public void editContact(String name, Contact newContact) throws AddressBookEmptyException  {
+        if (contacts.isEmpty()) {
+            throw new AddressBookEmptyException();
+        }
         contacts.put(name, newContact);
     }
 
-    public void deleteContact(String name) {
+    public void deleteContact(String name) throws AddressBookEmptyException {
+        if (contacts.isEmpty()) {
+            throw new AddressBookEmptyException();
+        }
         contacts.remove(name);
     }
 
-    public void displayContacts() {
+    public void displayContacts() throws AddressBookEmptyException {
         if (contacts.isEmpty()) {
-            System.out.println("No contacts available.");
-        } else {
-            for (Contact contact : contacts.values()) {
-                System.out.println(contact);
-            }
+            throw new AddressBookEmptyException();
+        }
+        for (Contact contact : contacts.values()) {
+            System.out.println(contact);
         }
     }
 
-    // Get all contacts for saving to file
     public Iterable<Contact> getAllContacts() {
         return contacts.values();
+    }
+
+    public boolean isEmpty() {
+        return contacts.isEmpty();
     }
 }
 
@@ -98,11 +104,12 @@ class AddressBookEmptyException extends Exception {
         super("The address book is empty.");
     }
 }
-class ContactNotFoundException extends Exception {
-    public ContactNotFoundException(String name) {
-        super("Contact with name '" + name + "' not found.");
+class ContactInvalidException extends Exception {
+    public ContactInvalidException(String name) {
+        super("Contact with name '" + name + "' is invalid or not found.");
     }
 }
+
 
 
 
